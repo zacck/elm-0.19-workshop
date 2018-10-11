@@ -89,7 +89,7 @@ viewTag selectedTagName tagName =
     in
     button
         [ class ("tag-pill " ++ otherClass)
-        , onClick { description = "desc", data = otherClass }
+        , onClick { description = "ClickedTag", data = otherClass }
         ]
         [ text tagName ]
 
