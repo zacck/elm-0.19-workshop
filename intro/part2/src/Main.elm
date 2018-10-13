@@ -13,7 +13,7 @@ viewTags tags =
 
 
 viewTag tagName =
-    button [ class "tag-pill tag-default"] [ text tagName ]
+    button [ class "tag-pill tag-default" ] [ text tagName ]
 
 
 main =
