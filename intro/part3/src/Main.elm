@@ -25,11 +25,11 @@ initialModel =
 
 
 update msg model =
-    if msg.description == "ClickedTag" then 
-       { model | selectedTag = msg.data }
-        
+    if msg.description == "ClickedTag" then
+        { model | selectedTag = msg.data }
+
     else
-       model  
+        model
 
 
 
@@ -39,7 +39,7 @@ update msg model =
 view model =
     let
         articles =
-            List.filter (\article -> (List.member model.selectedTag article.tags))
+            List.filter (\article -> List.member model.selectedTag article.tags)
                 model.allArticles
 
         feed =
@@ -89,7 +89,7 @@ viewTag selectedTagName tagName =
     in
     button
         [ class ("tag-pill " ++ otherClass)
-        , onClick { description = "ClickedTag", data = otherClass }
+        , onClick { description = "ClickedTag", data = tagName }
         ]
         [ text tagName ]
 
