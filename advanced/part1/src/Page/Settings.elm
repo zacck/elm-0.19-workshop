@@ -58,11 +58,14 @@ init session =
 
                         cred =
                             Viewer.cred viewer
+                        
+                        uname = Username.toString (Cred.username cred)
+                            
                     in
                     { avatar = Maybe.withDefault "" (Avatar.toMaybeString (Profile.avatar profile))
                     , email = Email.toString (Viewer.email viewer)
                     , bio = Maybe.withDefault "" (Profile.bio profile)
-                    , username = Username.toString cred.username
+                    , username = uname
                     , password = ""
                     }
 
