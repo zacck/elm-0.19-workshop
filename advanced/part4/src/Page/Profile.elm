@@ -108,13 +108,6 @@ defaultFeedTab =
 
 
 -- HTTP
-
-
-{-| 👉 TODO: refactor this to accept narrower types than the entire Model.
-
-    💡 HINT: It may end up with multiple arguments!
-
--}
 fetchFeed : Model -> FeedTab -> Int -> Cmd Msg
 fetchFeed model feedTabs page =
     let
