@@ -103,7 +103,8 @@ view model =
                             Loaded feed ->
                                 [ div [ class "feed-toggle" ] <|
                                     List.concat
-                                        [ [ viewTabs model ]
+                                        [ [ 
+                                            viewTabs (Session.cred model.session) model.feedTab]
                                         , Feed.viewArticles model.timeZone feed
                                             |> List.map (Html.map GotFeedMsg)
                                         , [ Feed.viewPagination ClickedFeedPage feed ]
@@ -153,23 +154,16 @@ viewBanner =
 
 
 -- TABS
-
-
-{-| 👉 TODO: refactor this to accept narrower types than the entire Model.
-
-    💡 HINT: It may end up with multiple arguments!
-
--}
-viewTabs : Model -> Html Msg
-viewTabs model =
-    case model.feedTab of
+viewTabs : Maybe Cred -> FeedTab -> Html Msg
+viewTabs maybeCred tab =
+    case tab of
         YourFeed cred ->
             Feed.viewTabs [] (yourFeed cred) [ globalFeed ]
 
         GlobalFeed ->
             let
                 otherTabs =
-                    case Session.cred model.session of
+                    case maybeCred of
                         Just cred ->
                             [ yourFeed cred ]
 
@@ -181,7 +175,7 @@ viewTabs model =
         TagFeed tag ->
             let
                 otherTabs =
-                    case Session.cred model.session of
+                    case maybeCred of
                         Just cred ->
                             [ yourFeed cred, globalFeed ]
 
